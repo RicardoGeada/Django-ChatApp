@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+  {% block content %}
+    <h1>Sign up</h1>
+
+    <form action="/signup/" method="POST">
+        {% csrf_token %}
+        <!-- <input type="hidden" name="redirect" value="{{ redirect }}" /> -->
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <input type="text" name="username" class="mdl-textfield__input" id="username"/>
+          <label class="mdl-textfield__label" for="username">Username...</label>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <input type="email" name="email" class="mdl-textfield__input" id="email"/>
+          <label class="mdl-textfield__label" for="email">Email...</label>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <input type="password" name="password" class="mdl-textfield__input" id="password"/>
+          <label class="mdl-textfield__label" for="password">Password...</label>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <input type="password" name="conf_password" class="mdl-textfield__input" id="conf_password"/>
+          <label class="mdl-textfield__label" for="conf_password">Confirm Password...</label>
+        </div>
+        <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Signup</button>
+    </form>
+
+    {% if emailExists %}
+      <p class="error">This email already exists.</p>
+    {% endif %}
+
+    {% if passwordsDontMatch %}
+      <p class="error">The passwords are not equal.</p>
+    {% endif %}
+  {% endblock %}
