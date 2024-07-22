@@ -6,3 +6,37 @@
 .color-grey {
   color: grey;
 }
+
+.message-container-outer {
+  border: 1px solid grey;
+  border-radius: 20px;
+  padding: 8px;
+  margin-bottom: 32px;
+}
+
+.message-container-inner {
+  height: 100%;
+  max-height: 300px;
+  overflow: auto;
+}
+
+.chat-message {
+  .time {
+    color: grey
+  }
+  .text {
+    color: black;
+  }
+  &.error {
+    .text {
+      color: red;
+    }
+  }
+  &.pending {
+    .text {
+      color: grey;
+    }
+  }
+}
+
+

@@ -1,35 +1,44 @@
-{% extends "base.html" %} {% block content %}
-<!-- Your content goes here -->
-<!-- Textfield with Floating Label -->
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+<script src="{% static 'js/chat.js' %}"></script>
+
+
 {% if request.user.is_authenticated %}
 
-<form action="/chat/" method="post">
-  <!-- Django Token -->
+<div class="message-container-outer">
+  <div class="message-container-inner" id="messageContainer">
+    {% for message in messages %}
+    <div id="{{ message.id }}" class="chat-message">
+      <span class="time">[{{ message.created_at }}]</span>
+      {{ message.author.first_name }}:
+      <i class="text">{{ message.text }}</i>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+
+<form onsubmit="sendMessage(); return false;" method="post">
   {% csrf_token %}
   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <input type="hidden" name="username"  value="{{ request.user.first_name }}" id="username">
     <input
       class="mdl-textfield__input"
       type="text"
-      id="sample3"
+      id="messageField"
       name="textmessage"
     />
-    <label class="mdl-textfield__label" for="sample3">Text...</label>
+    <label class="mdl-textfield__label" for="messageField">Text...</label>
   </div>
-  <!-- Accent-colored raised button with ripple -->
-  <button
-    class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
-  >
+  <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
     Send
   </button>
 </form>
 
-{% for message in messages %}
-<div>
-  <span class="color-grey">[{{ message.created_at }}]</span>
-  {{ message.author.first_name }}:
-  <i>{{ message.text }}</i>
-</div>
-{% endfor %} {% else %}
+
+
+{% else %}
 <h1>You aren't logged in.</h1>
 <p>Please log in. Click <a href="/login/">here</a> for login.</p>
 {% endif %} {% endblock %}

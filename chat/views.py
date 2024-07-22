@@ -1,22 +1,30 @@
-from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.http import HttpResponseRedirect, JsonResponse
+from django.shortcuts import render, redirect
 from chat.models import Chat, Message
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.core import serializers
 
 # Create your views here.
 @login_required(login_url='/login/')
 def index(request):
+    """
+    render chat / handle POST requests for messages
+    """
     if request.method == 'POST':
-        print('Received Data ' + request.POST['textmessage'])
         myChat = Chat.objects.get(id=1)
-        Message.objects.create(text=request.POST['textmessage'], chat=myChat, author=request.user, receiver=request.user)
+        new_message = Message.objects.create(text=request.POST['textmessage'], chat=myChat, author=request.user, receiver=request.user)
+        serialized_obj = serializers.serialize('json', [new_message,])
+        return JsonResponse(serialized_obj[1:-1], safe=False)
     chatMessages = Message.objects.filter(chat__id=1) # Wir schauen von der Message auf das Chat Objekt mit der ID 1
     return render(request, 'chat/index.html', { 'messages' : chatMessages })
 
 
 def login_view(request):
+    """
+    render login / handle POST requests for login
+    """
     redirect = request.GET.get('next') or '/chat/'
     if request.method == 'POST':
         user = authenticate(username=request.POST.get('username'), password=request.POST.get('password'))
@@ -30,6 +38,9 @@ def login_view(request):
 
 
 def signup_view(request):
+    """
+    render signup / handle POST request for signup
+    """
     if request.method == 'POST':
         name = request.POST.get('username')
         email = request.POST.get('email')
@@ -45,3 +56,11 @@ def signup_view(request):
             user.save()
             return HttpResponseRedirect('/login/')
     return render(request, 'auth/signup.html') 
+
+
+def logout_view(request):
+    """
+    logout user / redirect to login
+    """
+    logout(request)
+    return redirect('/login')

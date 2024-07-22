@@ -90,6 +90,9 @@ venv.bak/
 # mkdocs documentation 
 /site 
 
+# sphinx documentation
+/docs
+
 # mypy 
 .mypy_cache/ 
 
