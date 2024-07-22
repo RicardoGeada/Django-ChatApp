@@ -6,19 +6,19 @@
         {% csrf_token %}
         <!-- <input type="hidden" name="redirect" value="{{ redirect }}" /> -->
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <input type="text" name="username" class="mdl-textfield__input" id="username"/>
+          <input type="text" name="username" class="mdl-textfield__input" id="username" required />
           <label class="mdl-textfield__label" for="username">Username...</label>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <input type="email" name="email" class="mdl-textfield__input" id="email"/>
+          <input type="email" name="email" class="mdl-textfield__input" id="email" required />
           <label class="mdl-textfield__label" for="email">Email...</label>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <input type="password" name="password" class="mdl-textfield__input" id="password"/>
+          <input type="password" name="password" class="mdl-textfield__input" id="password" required />
           <label class="mdl-textfield__label" for="password">Password...</label>
         </div>
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-          <input type="password" name="conf_password" class="mdl-textfield__input" id="conf_password"/>
+          <input type="password" name="conf_password" class="mdl-textfield__input" id="conf_password" required />
           <label class="mdl-textfield__label" for="conf_password">Confirm Password...</label>
         </div>
         <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">Signup</button>
