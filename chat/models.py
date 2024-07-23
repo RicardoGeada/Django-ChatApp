@@ -4,6 +4,7 @@ from django.conf import settings
 
 # Create your models here.
 class Chat(models.Model):
+    id = models.AutoField(primary_key=True)
     created_at = models.DateField(default= date.today)
 class Message(models.Model):
     text = models.CharField(max_length=500)

@@ -13,7 +13,7 @@ def index(request):
     render chat / handle POST requests for messages
     """
     if request.method == 'POST':
-        myChat = Chat.objects.get(id=1)
+        myChat,created = Chat.objects.get_or_create(id=1)
         new_message = Message.objects.create(text=request.POST['textmessage'], chat=myChat, author=request.user, receiver=request.user)
         serialized_obj = serializers.serialize('json', [new_message,])
         return JsonResponse(serialized_obj[1:-1], safe=False)
