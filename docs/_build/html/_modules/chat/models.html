@@ -79,6 +79,7 @@
 <div class="viewcode-block" id="Chat">
 <a class="viewcode-back" href="../../chat.html#chat.models.Chat">[docs]</a>
 <span class="k">class</span> <span class="nc">Chat</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">AutoField</span><span class="p">(</span><span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">created_at</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">DateField</span><span class="p">(</span><span class="n">default</span><span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="n">today</span><span class="p">)</span></div>
 
 <div class="viewcode-block" id="Message">
